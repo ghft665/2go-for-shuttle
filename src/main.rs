@@ -27,7 +27,7 @@ async fn read_sub() -> impl IntoResponse {
 async fn create_config_files() {
     let file_path = env::var("FILE_PATH").unwrap_or_else(|_| "./tmp".to_string());
     let uuid = env::var("UUID").unwrap_or_default();
-    let argo_port = env::var("ARGO_PORT").unwrap_or_else(|_| "8001".to_string()); 
+    let argo_port = env::var("ARGO_PORT").unwrap_or_else(|_| "8080".to_string()); 
     let argo_auth = env::var("ARGO_AUTH").unwrap_or_default();
     let argo_domain = env::var("ARGO_DOMAIN").unwrap_or_default();
     
@@ -123,7 +123,7 @@ ingress:
         },
         "inbounds": [
             {
-                "port": argo_port.parse::<i32>().unwrap_or(8001),
+                "port": argo_port.parse::<i32>().unwrap_or(8080),
                 "protocol": "vless",
                 "settings": {
                     "clients": [
