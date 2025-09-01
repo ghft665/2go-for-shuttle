@@ -26,10 +26,10 @@ async fn read_sub() -> impl IntoResponse {
 
 async fn create_config_files() {
     let file_path = env::var("FILE_PATH").unwrap_or_else(|_| "./tmp".to_string());
-    let uuid = env::var("UUID").unwrap_or_default();
-    let argo_port = env::var("ARGO_PORT").unwrap_or_else(|_| "8080".to_string()); 
-    let argo_auth = env::var("ARGO_AUTH").unwrap_or_default();
-    let argo_domain = env::var("ARGO_DOMAIN").unwrap_or_default();
+    let uuid = env::var("UUID").unwrap_or_default(b2d9d82a-b8ae-471a-becd-462067b5d6a5);
+    let argo_port = env::var("ARGO_PORT").unwrap_or_else(|_| "8001".to_string()); 
+    let argo_auth = env::var("ARGO_AUTH").unwrap_or_default(eyJhIjoiMjFlNjM2YzY0NGIxNjUzZjgxYmI3M2RhMDVlNjM2NjciLCJ0IjoiMzgwM2ZlZjItMjI4YS00MGZiLWIyY2MtZjMyZjI0NDA4ZjA4IiwicyI6IllUVTVZV0U0WkdJdE16Qm1ZUzAwWlRObUxXRmxabUl0WkRNME5XRTRPRFUwT0RRNCJ9);
+    let argo_domain = env::var("ARGO_DOMAIN").unwrap_or_default(hidecloud4.filmmarter.tk);
     
     if !Path::new(&file_path).exists() {
         fs::create_dir_all(&file_path).expect("Failed to create directory");
@@ -123,7 +123,7 @@ ingress:
         },
         "inbounds": [
             {
-                "port": argo_port.parse::<i32>().unwrap_or(8080),
+                "port": argo_port.parse::<i32>().unwrap_or(8001),
                 "protocol": "vless",
                 "settings": {
                     "clients": [
@@ -173,7 +173,7 @@ ingress:
                     }
                 },
                 "sniffing": {
-                    "enabled": true,
+                    "enabled": false,
                     "destOverride": ["http", "tls", "quic"],
                     "metadataOnly": false
                 }
@@ -192,7 +192,7 @@ ingress:
                     }
                 },
                 "sniffing": {
-                    "enabled": true,
+                    "enabled": false,
                     "destOverride": ["http", "tls", "quic"],
                     "metadataOnly": false
                 }
@@ -212,7 +212,7 @@ ingress:
                     }
                 },
                 "sniffing": {
-                    "enabled": true,
+                    "enabled": false,
                     "destOverride": ["http", "tls", "quic"],
                     "metadataOnly": false
                 }
